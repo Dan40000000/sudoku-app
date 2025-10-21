@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import Home from './components/Home'
 import SudokuGrid from './components/SudokuGrid'
 import Controls from './components/Controls'
 import { generatePuzzle, isValidMove, isPuzzleComplete, copyBoard } from './utils/sudoku'
 import './App.css'
 
 function App() {
+  const [gameStarted, setGameStarted] = useState(false)
   const [board, setBoard] = useState(null)
   const [solution, setSolution] = useState(null)
   const [fixedCells, setFixedCells] = useState(null)
@@ -12,20 +14,24 @@ function App() {
   const [difficulty, setDifficulty] = useState('medium')
   const [gameWon, setGameWon] = useState(false)
 
-  // Initialize game on mount
-  useEffect(() => {
-    startNewGame(difficulty)
-  }, [])
-
   const startNewGame = (diff) => {
     const { puzzle, solution: sol } = generatePuzzle(diff)
     setBoard(copyBoard(puzzle))
     setSolution(sol)
     setGameWon(false)
+    setDifficulty(diff)
+    setGameStarted(true)
 
     // Mark fixed cells
     const fixed = puzzle.map(row => row.map(cell => cell !== 0))
     setFixedCells(fixed)
+  }
+
+  const returnToHome = () => {
+    setGameStarted(false)
+    setBoard(null)
+    setSelectedCell(null)
+    setGameWon(false)
   }
 
   const handleNumberSelect = (num) => {
@@ -84,34 +90,42 @@ function App() {
   }
 
   const handleNewGame = () => {
-    startNewGame(difficulty)
+    returnToHome()
   }
 
-  if (!board) {
-    return <div className="loading">Loading game...</div>
+  if (!gameStarted) {
+    return <Home onStartGame={startNewGame} />
   }
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Sudoku</h1>
-        {gameWon && <div className="win-message">You Won!</div>}
+        <div className="header-content">
+          <button className="back-button" onClick={returnToHome}>
+            ← Back
+          </button>
+          <h1 className="app-title">Sudoku</h1>
+          <div className="difficulty-badge">{difficulty}</div>
+        </div>
+        {gameWon && <div className="win-message">Puzzle Complete!</div>}
       </header>
 
-      <SudokuGrid
-        board={board}
-        fixedCells={fixedCells}
-        onCellChange={handleCellChange}
-      />
+      <div className="game-container">
+        <SudokuGrid
+          board={board}
+          fixedCells={fixedCells}
+          onCellChange={handleCellChange}
+        />
 
-      <Controls
-        onNumberSelect={handleNumberSelect}
-        onNewGame={handleNewGame}
-        onClear={handleClear}
-        onHint={handleHint}
-        difficulty={difficulty}
-        onDifficultyChange={handleDifficultyChange}
-      />
+        <Controls
+          onNumberSelect={handleNumberSelect}
+          onNewGame={handleNewGame}
+          onClear={handleClear}
+          onHint={handleHint}
+          difficulty={difficulty}
+          onDifficultyChange={handleDifficultyChange}
+        />
+      </div>
     </div>
   )
 }

@@ -1,87 +1,86 @@
 .controls {
   width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
+  max-width: 450px;
+  margin: 24px auto 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .difficulty-selector {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 16px;
-}
-
-.difficulty-selector select {
-  padding: 8px 16px;
-  font-size: 16px;
-  border: 2px solid #2196F3;
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
+  display: none;
 }
 
 .number-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
 }
 
 .number-button {
-  padding: 20px;
-  font-size: 24px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
   font-weight: 600;
-  border: 2px solid #2196F3;
-  border-radius: 8px;
-  background: white;
-  color: #2196F3;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #000000;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   -webkit-tap-highlight-color: transparent;
+}
+
+.number-button:hover {
+  border-color: #60A5FA;
+  background: #EFF6FF;
 }
 
 .number-button:active {
   transform: scale(0.95);
-  background: #2196F3;
+  background: #60A5FA;
   color: white;
+  border-color: #60A5FA;
 }
 
 .action-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .action-button {
-  padding: 12px 20px;
-  font-size: 16px;
+  padding: 16px 20px;
+  font-size: 15px;
   font-weight: 600;
-  border: none;
-  border-radius: 8px;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   -webkit-tap-highlight-color: transparent;
+  background: #ffffff;
+  color: #000000;
+}
+
+.action-button:hover {
+  border-color: #60A5FA;
+  background: #EFF6FF;
 }
 
 .action-button.new-game {
-  background: #4CAF50;
-  color: white;
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
 }
 
-.action-button.clear {
-  background: #FF9800;
-  color: white;
-}
-
-.action-button.hint {
-  background: #9C27B0;
-  color: white;
+.action-button.new-game:hover {
+  background: #1F2937;
+  border-color: #1F2937;
 }
 
 .action-button:active {
-  transform: scale(0.95);
-  opacity: 0.8;
+  transform: scale(0.98);
 }
