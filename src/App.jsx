@@ -93,8 +93,11 @@ function App() {
     returnToHome()
   }
 
+  // Mock saved game data - will be replaced with localStorage/database later
+  const savedGame = null; // Set to null for now, can be: { difficulty: 'medium', progress: 45 }
+
   if (!gameStarted) {
-    return <Home onStartGame={startNewGame} />
+    return <Home onStartGame={startNewGame} savedGame={savedGame} />
   }
 
   return (
