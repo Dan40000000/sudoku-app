@@ -1,0 +1,28 @@
+.sudoku-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  border: 3px solid #333;
+  background: #333;
+  margin: 0 auto;
+}
+
+.sudoku-row {
+  display: flex;
+  flex: 1;
+}
+
+.cell-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.cell-wrapper.border-right {
+  border-right: 3px solid #333;
+}
+
+.cell-wrapper.border-bottom {
+  border-bottom: 3px solid #333;
+}
